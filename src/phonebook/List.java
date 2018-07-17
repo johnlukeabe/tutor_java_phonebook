@@ -5,7 +5,7 @@
  */
 package phonebook;
 
-class Node {
+class Node<Object> {
     Object data;
     Node next;
     
@@ -24,9 +24,9 @@ class Node {
  *
  * @author John
  */
-public class List {
-    private Node head;
-    private Node tail;
+public class List<Object> {
+    private Node<Object> head;
+    private Node<Object> tail;
     private int length;
 
     List() {
@@ -36,7 +36,7 @@ public class List {
     }
 
     void add(Object input) {
-        Node n = new Node(input);
+        Node<Object> n = new Node<Object>(input);
         
         if (isEmpty()) {
             head = tail = n;
@@ -53,7 +53,7 @@ public class List {
             System.out.println("The list is empty!");
 	} else {
             // go through list and print in order
-            Node n = head;
+            Node<Object> n = head;
             for (int i = 0; i < length; i++) {
 		System.out.print("Index = " + (i+1) + " ");
 		System.out.println(n);

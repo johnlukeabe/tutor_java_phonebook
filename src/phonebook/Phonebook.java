@@ -23,7 +23,7 @@ public class Phonebook {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        List newList = new List();
+        List<Person> newList = new List<Person>();
         String input;
 	boolean exit = false;
 
