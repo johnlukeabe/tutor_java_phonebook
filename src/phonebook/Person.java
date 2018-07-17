@@ -7,7 +7,7 @@ package phonebook;
 
 /**
  *
- * @author John
+ * @author Jungsu Sohn
  */
 public class Person {   
     private String name;
