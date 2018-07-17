@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author John
+ * @author Jungsu Sohn
  */
 public class Phonebook {
     List newList;
