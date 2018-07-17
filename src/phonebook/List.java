@@ -5,6 +5,11 @@
  */
 package phonebook;
 
+/**
+ *
+ * @author Jungsu Sohn
+ */
+
 class Node<Object> {
     Object data;
     Node next;
@@ -20,10 +25,6 @@ class Node<Object> {
     }
 }
 
-/**
- *
- * @author John
- */
 public class List<Object> {
     private Node<Object> head;
     private Node<Object> tail;
