@@ -11,6 +11,7 @@ import java.util.Scanner;
  *
  * @author Jungsu Sohn
  */
+/* TEST */
 public class Phonebook {
     List newList;
     
