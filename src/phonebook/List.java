@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package phonebook;
 
 /**
@@ -63,7 +64,25 @@ public class List<Object> {
             System.out.println();
 	}
     }
+
+    Object getHeadData() {
+        return head.data;
+    }
     
+    Object getIdx(int n) {
+        Node<Object> temp = head;
+        if(n == 0) return head.data;
+        for(int i = 1; i < n; i++) {
+           temp = temp.next;
+           if(n >= length) return null;
+        }
+        return temp.data;
+    }
+
+    int getLength() {
+        return length;
+    }
+
     boolean isEmpty() {
 	return (length == 0);
     }
