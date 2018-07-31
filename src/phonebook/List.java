@@ -13,15 +13,15 @@ package phonebook;
 
 class Node<Object> {
     Object data;
-    Node next;
+    Node<Object> next;
     
     Node(Object input) {
         data = input;
         next = null;
     }
     
-    @Override
-    public String toString(){
+@Override
+public String toString(){
         return String.valueOf(this.data);
     }
 }
@@ -72,11 +72,40 @@ public class List<Object> {
     Object getIdx(int n) {
         Node<Object> temp = head;
         if(n == 0) return head.data;
-        for(int i = 1; i < n; i++) {
+        for(int i = 1; i <= n; i++) {
            temp = temp.next;
            if(n >= length) return null;
         }
         return temp.data;
+    }
+
+    Node getNode(int n) {
+        Node<Object> temp = head;
+        if(n == 0) return head;
+        if(n >= length) return null;
+        for(int i = 1; i <= n; i++) {
+           temp = temp.next;
+           if(i == n) {
+               return temp;
+           }
+        }
+        return null;
+    }
+
+    void delete(int d) {
+        // delete head
+        if (d == 0) {
+            head = head.next;
+        // delete tail
+	} else if (d == length - 1) {
+            Node<Object> temp = getNode(length - 2);
+            temp.next = null;
+            tail = temp;
+        } else {
+            Node<Object> temp = getNode(d - 1);
+            temp.next = temp.next.next;
+        }
+        length--;
     }
 
     int getLength() {

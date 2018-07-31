@@ -30,7 +30,7 @@ public class Phonebook {
         do {
             System.out.println();
             System.out.format("****************************************%n");
-            System.out.format("(A)dd  \n(P)rint List \n(S)earch \n(Q)uit%n");
+            System.out.format("(A)dd  \n(P)rint List \n(S)earch \n(D)elete \n(Q)uit%n");
             System.out.format("****************************************%n");
             System.out.format("Please Enter a command: ");
             input = in.nextLine().toUpperCase();
@@ -58,8 +58,22 @@ public class Phonebook {
                     name = in.nextLine();
                     boolean isFound = false;
                     for(int i = 0; i < newList.getLength(); i++) {
-                        if(newList.getIdx(i).getName().equals(name)) {
-                            System.out.println(newList.getIdx(i));
+                        Person p = newList.getIdx(i);
+                        if(p != null && p.getName().equals(name)) {
+                            System.out.println(p);
+                            isFound = true;
+                        }
+                    }
+                    if(isFound == false) System.out.println("Not Found");
+                    break;
+                case "D":
+                    System.out.println("Enter a name to delete: ");
+                    name = in.nextLine();
+                    isFound = false;
+                    for(int i = 0; i < newList.getLength(); i++) {
+                        Person p = newList.getIdx(i);
+                        if(p != null && p.getName().equals(name)) {
+                            newList.delete(i);
                             isFound = true;
                         }
                     }
