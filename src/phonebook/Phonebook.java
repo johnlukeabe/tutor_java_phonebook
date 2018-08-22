@@ -84,12 +84,12 @@ public class Phonebook {
                     if(isFound == false) System.out.println("Not Found");
                     break;                    
                 case "D":
-                    System.out.println("Enter a name to delete: ");
-                    name = in.nextLine();
+                    System.out.println("Enter an Email to delete: ");
+                    email = in.nextLine();
                     isFound = false;
                     for(int i = 0; i < newList.getLength(); i++) {
                         Person p = newList.getIdx(i);
-                        if(p != null && p.getName().equals(name)) {
+                        if(p != null && p.getEmail().equals(email)) {
                             newList.delete(i);
                             isFound = true;
                         }
