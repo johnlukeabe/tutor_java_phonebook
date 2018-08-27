@@ -12,6 +12,7 @@ package phonebook;
 public class Person {   
     private String name;
     private String number;
+    private String email;
 
     Person (){ }
     
@@ -31,8 +32,17 @@ public class Person {
         this.number = number;
     }
     
+    String getEmail() {
+        return this.email;
+    }
+    
+    void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
     @Override
     public String toString() {
-        return "Name   : " + this.name + ", " + "Number : " + this.number;
+        return "Name   : " + this.name + ", " + "Number : " + this.number + ", " + "Email : " + this.email;
     }
 }

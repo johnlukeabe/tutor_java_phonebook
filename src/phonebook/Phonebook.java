@@ -30,7 +30,7 @@ public class Phonebook {
         do {
             System.out.println();
             System.out.format("****************************************%n");
-            System.out.format("(A)dd  \n(P)rint List \n(S)earch \n(D)elete \n(Q)uit%n");
+            System.out.format("(A)dd \n(P)rint List \nSearch by (N)ame \nSearch by (E)mail \n(D)elete \n(Q)uit%n");
             System.out.format("****************************************%n");
             System.out.format("Please Enter a command: ");
             input = in.nextLine().toUpperCase();
@@ -44,16 +44,20 @@ public class Phonebook {
                     System.out.print("Enter a Phone Number: ");
                     String phoneNumber = in.nextLine();
                     
+                    System.out.print("Enter an Email: ");
+                    String email = in.nextLine();
+                    
                     Person newNode = new Person();		
                     newNode.setName(name);	
                     newNode.setNumber(phoneNumber);
+                    newNode.setEmail(email);
                     newList.add(newNode);
                     break;                      
                 case "P": 
                     System.out.println("Print Phonebook");
                     newList.printList();
                     break; 
-                case "S":
+                case "N":
                     System.out.println("Enter a name to search: ");
                     name = in.nextLine();
                     boolean isFound = false;
@@ -66,6 +70,19 @@ public class Phonebook {
                     }
                     if(isFound == false) System.out.println("Not Found");
                     break;
+                case "E":
+                    System.out.println("Enter an Email to search: ");
+                    email = in.nextLine();
+                    isFound = false;
+                    for(int i = 0; i < newList.getLength(); i++) {
+                        Person p = newList.getIdx(i);
+                        if(p != null && p.getEmail().equals(email)) {
+                            System.out.println(p);
+                            isFound = true;
+                        }
+                    }
+                    if(isFound == false) System.out.println("Not Found");
+                    break;                    
                 case "D":
                     System.out.println("Enter a name to delete: ");
                     name = in.nextLine();
