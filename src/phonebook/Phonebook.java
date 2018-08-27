@@ -5,6 +5,9 @@
  */
 package phonebook;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -30,7 +33,7 @@ public class Phonebook {
         do {
             System.out.println();
             System.out.format("****************************************%n");
-            System.out.format("(A)dd \n(P)rint List \nSearch by (N)ame \nSearch by (E)mail \n(D)elete \n(Q)uit%n");
+            System.out.format("(A)dd \n(P)rint List \nSearch by (N)ame \nSearch by (E)mail \n(D)elete \n(S)ave \n(Q)uit%n");
             System.out.format("****************************************%n");
             System.out.format("Please Enter a command: ");
             input = in.nextLine().toUpperCase();
@@ -99,6 +102,29 @@ public class Phonebook {
                 case "Q": 
                     System.out.println("Exiting Phonebook");
                     exit = true;
+                    break;
+                case "S":
+                    BufferedWriter wr = null;
+                    try { 
+                        wr = new BufferedWriter(new FileWriter("phoneBook.txt", true));
+                        if (newList.isEmpty()) {
+                            System.out.println("Nothing on the Phonebook");
+                        } else {
+                            for(int i = 0 ; i < newList.getLength(); i++) {
+                                wr.append(newList.getNode(i).toString());
+                                wr.newLine();
+                            }
+                        }
+                    } catch (IOException ex) {
+                        System.out.println(ex);
+                    } finally {
+                        if (wr != null) {
+                            try {
+                                wr.close();
+                            } catch (IOException ex) {
+                            }
+                        }
+                    }
                     break;
                 default: 
                     System.out.println("Unknown command");
