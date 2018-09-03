@@ -43,6 +43,6 @@ public class Person {
     
     @Override
     public String toString() {
-        return "Name   : " + this.name + ", " + "Number : " + this.number + ", " + "Email : " + this.email;
+        return "Name : " + this.name + ", " + "Number : " + this.number + ", " + "Email : " + this.email;
     }
 }

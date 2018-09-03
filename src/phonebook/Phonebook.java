@@ -5,6 +5,13 @@
  */
 package phonebook;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -21,7 +28,7 @@ public class Phonebook {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, FileNotFoundException, FileNotFoundException, IOException {
         Scanner in = new Scanner(System.in);
         List<Person> newList = new List<Person>();
         String input;
@@ -30,29 +37,57 @@ public class Phonebook {
         do {
             System.out.println();
             System.out.format("****************************************%n");
-            System.out.format("(A)dd \n(P)rint List \nSearch by (N)ame \nSearch by (E)mail \n(D)elete \n(Q)uit%n");
+            System.out.format("(F)etch \n(A)dd \n(P)rint List \nSearch by (N)ame \nSearch by (E)mail \n(D)elete \n(S)ave \n(Q)uit%n");
             System.out.format("****************************************%n");
             System.out.format("Please Enter a command: ");
             input = in.nextLine().toUpperCase();
             
             switch (input) {
+                case "F":
+                    File pb = new File("phoneBook.txt");
+                    boolean empty = pb.exists() && pb.length() == 0;
+                    // 위 불리언 변수의 "==0" 의 의미가 잘 이해가 안되요.
+                    String name;
+                    String phoneNumber;
+                    String email;
+
+                    if (empty == true) {
+                        System.out.println("Nothing to fectch.");
+                    } else {
+                        BufferedReader br = new BufferedReader(new FileReader("phoneBook.txt"));
+                        String line;
+
+                        while (null != (line = br.readLine())) {
+                            Person newNode = new Person();
+                            String[] tokens = line.split(":|,");
+                            name = tokens[1].trim();
+                            phoneNumber = tokens[3].trim();
+                            email = tokens[5].trim();
+                            newNode.setName(name);
+                            newNode.setNumber(phoneNumber);
+                            newNode.setEmail(email);
+                            newList.add(newNode);
+                        }
+                    }
+                    break;
                 case "A":
+                    Person newNode = new Person();
                     System.out.println("Add an entry");
                     System.out.print("Enter a Name: ");
-                    String name = in.nextLine();
+                    name = in.nextLine();
                     
                     System.out.print("Enter a Phone Number: ");
-                    String phoneNumber = in.nextLine();
+                    phoneNumber = in.nextLine();
                     
                     System.out.print("Enter an Email: ");
-                    String email = in.nextLine();
+                    email = in.nextLine();
                     
-                    Person newNode = new Person();		
-                    newNode.setName(name);	
+                    newNode.setName(name);
+                    newNode.setName(name);
                     newNode.setNumber(phoneNumber);
                     newNode.setEmail(email);
                     newList.add(newNode);
-                    break;                      
+                    break;                                                                                        
                 case "P": 
                     System.out.println("Print Phonebook");
                     newList.printList();
@@ -99,6 +134,29 @@ public class Phonebook {
                 case "Q": 
                     System.out.println("Exiting Phonebook");
                     exit = true;
+                    break;
+                case "S":
+                    BufferedWriter wr = null;
+                    try { 
+                        wr = new BufferedWriter(new FileWriter("phoneBook.txt", true));
+                        if (newList.isEmpty()) {
+                            System.out.println("Nothing on the Phonebook");
+                        } else {
+                            for(int i = 0 ; i < newList.getLength(); i++) {
+                                wr.append(newList.getNode(i).toString());
+                                wr.newLine();
+                            }
+                        }
+                    } catch (IOException ex) {
+                        System.out.println(ex);
+                    } finally {
+                        if (wr != null) {
+                            try {
+                                wr.close();
+                            } catch (IOException ex) {
+                            }
+                        }
+                    }
                     break;
                 default: 
                     System.out.println("Unknown command");
